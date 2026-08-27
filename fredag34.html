@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kapitel 1 Lektion 2</title>
+</head>
+<body>
+  <script src="http://koda.nu/simple.js">
+
+  // 1. Skapa variabler för första figuren
+  var x = 120;
+  var y = 50;
+  var storlek = 40;
+
+  // Rita första figuren med variabler
+  circle(x, y, storlek, "red");
+
+  // 2. Skapa ett objekt för andra figuren (player)
+
+  // Rita andra figuren med objektets egenskaper
+//   circle(player.x, player.y, player.size, player.color);
+var player = {
+    x: 350,
+    y: 250
+}
+ring(player.x, player.y, 100, 50, "blue")
+
+
+
+var enemy = {
+    x: 400,
+    y: 312
+}
+rectangle(enemy.x, enemy.y, 10, 50, "darkred")
+
+
+
+
+var spelare = {
+    x: 1000,
+    y: 400
+}
+line(spelare.x, spelare.y - 200, spelare.x, spelare.y, 10, "red") 
+ring(spelare.x, spelare.y - 250, 50, "red")
+rectangle(spelare.x - 75, spelare.y - 125, 150, 10, "red")
+line(spelare.x, spelare.y, spelare.x - 75, spelare.y + 75, 10, "red")
+line(spelare.x, spelare.y, spelare.x +75, spelare.y + 75, 10, "red")
+
+
+  </script>
+</body>
+</html>
