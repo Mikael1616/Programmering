@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kapitel 1 Lektion 1</title>
+</head>
+<body>
+  <script src="http://koda.nu/simple.js">
+
+  // skriv kod här
+circle(100, 50, 100, "blue")
+const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    // Cirkelns position och storlek
+    let x = 400;
+    let y = 300;
+    const radius = 30;
+    const speed = 5;          // Hur snabbt den rör sig
+
+    // Rita cirkeln
+    function draw() {
+      // Rensa skärmen
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Rita cirkeln
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fillStyle = '#00ff88';
+      ctx.fill();
+      ctx.closePath();
+    }
+
+    // Lyssna på tangenttryckningar
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowUp' || e.key === 'w') {
+        y -= speed;
+      }
+      if (e.key === 'ArrowDown' || e.key === 's') {
+        y += speed;
+      }
+      if (e.key === 'ArrowLeft' || e.key === 'a') {
+        x -= speed;
+      }
+      if (e.key === 'ArrowRight' || e.key === 'd') {
+        x += speed;
+      }
+
+      // Håll cirkeln innanför canvas
+      if (x < radius) x = radius;
+      if (x > canvas.width - radius) x = canvas.width - radius;
+      if (y < radius) y = radius;
+      if (y > canvas.height - radius) y = canvas.height - radius;
+
+      draw();
+    });
+
+    // Rita första gången
+    draw();
+  </script>
+</body>
+</html>
+2. Så öppnar du den
+
+Högerklicka på filen i VS Code
+Välj Open with Live Server (om du har Live Server-extensionen)
+eller bara högerklicka → Reveal in File Explorer → dubbelklicka på filen
+
+
+Tangenterna
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+TangentRörelse↑ eller WUpp↓ eller SNer← eller AVänster→ eller DHöger
+
+Vill du ha det i ett annat språk?
+Säg till vilket du använder så ger jag koden direkt:
+
+p5.js (väldigt vanligt i skolan)
+Python + Pygame
+Processing
+Unity (C#)
+
+Vill du också att cirkeln ska röra sig hela tiden så länge man håller inne tangenten (smooth movement) istället för att hoppa ett steg varje gång? Då kan jag ge dig en bättre version.
+  </script>
+</body>
+</html>

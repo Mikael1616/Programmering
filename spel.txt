@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cirkel-spel</title>
+</head>
+<body>
+  <canvas id="canvas" width="800" height="600"></canvas>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    // Spelarens cirkel (grön) – du styr den
+    let player = {
+      x: 100,
+      y: 300,
+      radius: 25,
+      speed: 5
+    };
+
+    // Fiende-cirkel (röd) – rör sig automatiskt
+    let enemy = {
+      x: 700,
+      y: 200,
+      radius: 30,
+      speedX: 3,
+      speedY: 2.5
+    };
+
+    const keys = {};
+
+    document.addEventListener('keydown', e => keys[e.key] = true);
+    document.addEventListener('keyup', e => keys[e.key] = false);
+
+    function collides(c1, c2) {
+      const dx = c1.x - c2.x;
+      const dy = c1.y - c2.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      return distance < c1.radius + c2.radius;
+    }
+
+    function reset() {
+      player.x = 100;
+      player.y = 300;
+      enemy.x = 700;
+      enemy.y = 200;
+      enemy.speedX = (Math.random() > 0.5 ? 1 : -1) * (2 + Math.random() * 3);
+      enemy.speedY = (Math.random() > 0.5 ? 1 : -1) * (2 + Math.random() * 3);
+    }
+
+    function gameLoop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Styra grön cirkel
+      if (keys['ArrowUp'] || keys['w']) player.y -= player.speed;
+      if (keys['ArrowDown'] || keys['s']) player.y += player.speed;
+      if (keys['ArrowLeft'] || keys['a']) player.x -= player.speed;
+      if (keys['ArrowRight'] || keys['d']) player.x += player.speed;
+
+      // Håll grön cirkel innanför
+      player.x = Math.max(player.radius, Math.min(canvas.width - player.radius, player.x));
+      player.y = Math.max(player.radius, Math.min(canvas.height - player.radius, player.y));
+
+      // Röd cirkel rör sig automatiskt
+      enemy.x += enemy.speedX;
+      enemy.y += enemy.speedY;
+
+      // Studsa mot kanterna
+      if (enemy.x <= enemy.radius || enemy.x >= canvas.width - enemy.radius) {
+        enemy.speedX *= -1;
+      }
+      if (enemy.y <= enemy.radius || enemy.y >= canvas.height - enemy.radius) {
+        enemy.speedY *= -1;
+      }
+
+      // Om de nuddar varandra → starta om
+      if (collides(player, enemy)) {
+        reset();
+      }
+
+      // Rita grön cirkel
+      ctx.beginPath();
+      ctx.arc(player.x, player.y, player.radius, 0, Math.PI * 2);
+      ctx.fillStyle = '#00ff88';
+      ctx.fill();
+
+      // Rita röd cirkel
+      ctx.beginPath();
+      ctx.arc(enemy.x, enemy.y, enemy.radius, 0, Math.PI * 2);
+      ctx.fillStyle = '#ff4444';
+      ctx.fill();
+
+      requestAnimationFrame(gameLoop);
+    }
+
+    reset();
+    gameLoop();
+  </script>
+</body>
+</html>
