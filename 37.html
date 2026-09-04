@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="sv">
 <head>
   <meta charset="UTF-8">
@@ -9,13 +9,44 @@
   <script src="http://koda.nu/simple.js">
 
   // din kod här
-var player = { x: 50, y: 50, size: 40, color:
-"blue", speedX: 2, speedY: 1 };
+var enemy = {
+    x: 100,
+    y: 100,
+    bredd: 50,
+    hojd: 50,
+    color: "red",
+    speedX: 5,
+    speedY: 0,
+    directionX: 1,
+    directionY: 1
+};
+
+
+
+
+  var player = { 
+    x: 800, 
+    y: 400, 
+    size: 40, 
+    color: "blue", 
+    speedX: 20, 
+    speedY: 10, 
+    directionX: 1,
+    directionY: 1
+};
 function update() {
-clearScreen();
-circle(player.x, player.y, player.size, player.color);
-player.x = player.x + player.speedX;
-player.y = player.y + player.speedY
+    clearScreen();
+    circle(player.x, player.y, player.size, player.color);
+    player.x = player.x + player.speedX * player.directionX
+    player.y = player.y + player.speedY * player.directionY
+   
+    rectangle(enemy.x, enemy.y, enemy.bredd, enemy.hojd, enemy.color)
+    
+    enemy.x = enemy.x + enemy.speedX * enemy.directionX
+    enemy.y = enemy.y + enemy.speedY * enemy.directionY
+
+
+
 }
 
 
