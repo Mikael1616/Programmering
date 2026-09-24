@@ -24,6 +24,11 @@ var zombie4 = { x: 800, y: 360 };
         rectangle(x - 35, y - 20, 30, 14, "lightgreen");
         rectangle(x - 20, y - 20, 30, 14, "grey");
     } 
+    function drawplayer() {
+        circle(player.x, player.y, player.size, player.color);
+        circle(player.x - 10, player.y, 5, "red")
+        circle(player.x + 10, player.y, 5, "red")
+    }
 function update() {
   clearScreen();
   text(20, 30, 24, "Zombiespelet", "black");
@@ -33,7 +38,8 @@ function update() {
    drawZombie(zombie2.x, zombie2.y);
    drawZombie(zombie3.x, zombie3.y);
    drawZombie(zombie4.x, zombie4.y);
-  circle(player.x, player.y, player.size, player.color);
+   drawplayer()
+  
 
   if (keyboard.right) {
     player.x = player.x + player.speed;
@@ -51,15 +57,20 @@ function update() {
   // STEG 2: träffkollen kommer här
   if( distance(player, zombie1) < 65 ) {
     text(20, 70, 30, "aj", "red")
+    stopUpdate()
   }
   if( distance(player, zombie4) < 65 ) {
     text(20, 70, 30, "aj", "red")
+    alert("spelet är slut")
   }
 if( distance(player, zombie2) < 65) {
     text(20, 70, 30, "aj", "red")
+    window.location.reload()
 }
 if( distance(player, zombie3) < 65) {
     text(20, 70, 30, "aj", "red")
+    player.x = 100
+    player.y = 300
 }
 console.log( distance(player, zombie1))
 }
