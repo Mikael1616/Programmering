@@ -41,12 +41,12 @@ function power(x, y, s, c) {
 function drawZombie(x, y) {
   save();
   translate(x, y);
-  rectangle(3, -10, 23, 65, "lightgreen");
-  rectangle(3, -25, 23, 65, "gray");
-  circle(15, -40, 20, "lightgreen");
+  rectangle(3, -10, 23, 65, "green");
+  rectangle(3, -25, 23, 65, "lightblue");
+  circle(15, -40, 20, "green");
   circle(0, -40, 3, "red");
-  rectangle(-35, -20, 30, 14, "lightgreen");
-  rectangle(-20, -20, 30, 14, "gray");
+  rectangle(-35, -20, 30, 14, "green");
+  rectangle(-20, -20, 30, 14, "lightblue");
   restore();
 }
 
@@ -56,7 +56,15 @@ function update() {
     enemies.push( {x: random(400, totalWidth, 700), y: random(650, totalHeight)})
   }
   text(20, 30, 24, "Zombiespelet", "black");
-
+"background.customImages" [
+    {
+        "image": "file:///C:/Users/DittNamn/Bilden/min-bakgrund.png",
+        "opacity": 0.15,
+        "alignment": "right",
+        "repeat": "no-repeat",
+        "size": "cover"
+    }
+]
   drawZombie(zombie1.x, zombie1.y);
   drawZombie(zombie2.x, zombie2.y);
   drawZombie(zombie3.x, zombie3.y);
