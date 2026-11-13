@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fix-It Felix - koda.nu</title>
+</head>
+<body>
+  <script src="http://koda.nu/simple.js">
+    // 1. BYGGNADEN (0 = helt fönster, 1 = trasigt fönster, 2 = trasig vägg)
+    var byggnad = [
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0]
+    ];
+
+    // 2. SPELAREN (Felix) position i rutnätet
+    var felixRad = 2;
+    var felixKol = 1;
+    var poang = 0;
+
+    // Timer för hur ofta skurken (Ralf) slår sönder något
+    var ralfTimer = 0;
+    
+    // Hjälpvariabel så man inte flyger iväg för snabbt när man håller inne en knapp
+    var tryckCooldown = 0;
+
+    // 3. SPELETS HUVUDLOOP (Körs automatiskt 30 gånger i sekunden i simple.js)
+    function update() {
+      clearScreen(); // Rensa skärmen varje bildruta
+
+      // Rita bakgrund och själva huset (en brun vägg)
+      fill("lightblue");
+      rectangle(150, 80, 460, 420, "brown");
+
+      // --- SKURKEN (Ralf) ---
+      ralfTimer++;
+      if (ralfTimer > 60) { // Varannan sekund (60 frames)
+        var slumpRad = random(3); // Slumpar 0, 1 eller 2
+        var slumpKol = random(4); // Slumpar 0, 1, 2 eller 3
+        
+        // Gör fönstret trasigt (1) eller väggen extra trasig (2)
+        if (byggnad[slumpRad][slumpKol] == 0) {
+          byggnad[slumpRad][slumpKol] = 1;
+        } else {
+          byggnad[slumpRad][slumpKol] = 2;
+        }
+        ralfTimer = 0; // Nollställ timern
+      }
+
+      // --- RITA FÖNSTER & SKADOR ---
+      for (var rad = 0; rad < 3; rad++) {
+        for (var kol = 0; kol < 4; kol++) {
+          var x = 190 + kol * 100;
+          var y = 120 + rad * 120;
+
+          if (byggnad[rad][kol] == 0) {
+            // Helt fönster (blått med vit ram)
+            rectangle(x, y, 70, 90, "white");
+            rectangle(x + 5, y + 5, 60, 80, "skyblue");
+          } else if (byggnad[rad][kol] == 1) {
+            // Trasigt fönster (rött/krossat)
+            rectangle(x, y, 70, 90, "white");
+            rectangle(x + 5, y + 5, 60, 80, "red");
+          } else if (byggnad[rad][kol] == 2) {
+            // Trasig vägg/extra förstört (svart hål)
+            rectangle(x - 5, y - 5, 80, 100, "black");
+          }
+        }
+      }
+
+      // --- STYRNING AV HJÄLTEN (Felix) ---
+      if (tryckCooldown > 0) {
+        tryckCooldown--;
+      }
+
+      if (tryckCooldown == 0) {
+        if (keyboard.up && felixRad > 0) {
+          felixRad--;
+          tryckCooldown = 8;
+        }
+        if (keyboard.down && felixRad < 2) {
+          felixRad++;
+          tryckCooldown = 8;
+        }
+        if (keyboard.left && felixKol > 0) {
+          felixKol--;
+          tryckCooldown = 8;
+        }
+        if (keyboard.right && felixKol < 3) {
+          felixKol++;
+          tryckCooldown = 8;
+        }
+
+        // Laga med MELLANSLAG (keyboard.space)
+        if (keyboard.space) {
+          if (byggnad[felixRad][felixKol] > 0) {
+            byggnad[felixRad][felixKol]--; // Lagar ett steg i taget (2 -> 1 -> 0)
+            poang += 100;
+            tryckCooldown = 8;
+          }
+        }
+      }
+
+      // --- RITA HJÄLTEN (Felix) ---
+      var felixX = 205 + felixKol * 100;
+      var felixY = 145 + felixRad * 120;
+      rectangle(felixX, felixY, 40, 50, "gold"); // Gul gubbe
+
+      // --- RITA POÄNG ---
+      text(20, 40, 20, "Poäng: " + poang, "black");
+      text(20, 65, 14, "Piltangenter = Gå | Mellanslag = Laga", "black");
+    }
+  </script>
+</body>
+</html>
