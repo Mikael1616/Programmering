@@ -1,0 +1,16 @@
+//minska tid kvar med 1
+
+sätt alla lagade till sant
+för varje rad i byggnad
+för varje ruta i rad
+om ruta är större än 0 då
+sätt alla lagade till falskt
+slut om
+slut för
+slut för
+
+om alla lagade är lika med sant då
+sätt spel status till vinst
+annars om tid kvar är mindre än eller lika med 0 då
+sätt spel status till förlust
+slut om
