@@ -1,1 +1,27 @@
-// 
+ 
+// ===== MIN PROJEKTPLAN ===== SAVE THE APARTMENT
+// Spelidé: (skriv en kort beskrivning, 2-4 meningar) min är ide är ett vakta basen spel där du ska försvara en byggnad från en fiende som förstör byggnaden och ditt jobb är att fixa det skurken har förstört och du har en tid på dig om du klarar det så blir det svårare om du misslyckas så börjar du om
+
+// --- SAKER JAG VILL ÖVA PÅ (utifrån tidigare feedback) --- det jag behöver öva på från gammla kapitels är speciellt arrays och det är väldigt viktigt i mitt spel speciellt. den andra saken är att inte glömma skriva kommentRER PÅ VAD DE KODER JAG HAR SKRIVIT GÖR
+// (Vad har du fått feedback om tidigare som du vill bli bättre på,
+//  eller något du aldrig hann klart med? Skriv in det här och se till
+//  att du övar på det i ditt spel under projektet.)
+// 1.
+
+// --- MITT KRAV (måste finnas) ---
+// Antal spelare: 1
+// Antal fiender/hinder: 1 eller 2 får se sen när spelet blivit klar x
+// Mål (hur vinner/klarar man spelet?): efter timern rinner ut och du har fixat hela huset då blir det svårare level och sista levlen kan det komma två skurkar x
+// Förlustvillkor (hur förlorar man?): om du inte hinner fixa huset som skurken har förstört x
+
+// --- MIN REKOMMENDATION (bör finnas) ---
+// 1. det ska kunna finnas att skurken kan skada dig om du träffas av stenar eller restavfall av skurken
+// 2.gubbarnas grafik blir bättre de ska va lite mer avancerade som när du går rör sig benen framåt och tillbaka och att du ska kunna hoppa
+
+// --- MIN UTMANING (kan finnas, om tid finns) ---
+// 1. hur jag ska timea när skurken ska förstöra saker från huset automatiskt och hur jag ska få gubben att hoppa och sen falla tilbaka
+// 2. att huset ändrats när skurken förstör huset 
+
+// --- FÖRBÄTTRINGAR ATT GÖRA SEN --- fixa buggar som kan komma i spelet sen gör så grafiken är tydligare och färgernas kontrast
+// (Lägg till fler idéer här under hela projektet.
+//  Känner du dig klar med allt ovan? Kolla den här listan och börja på nästa.)
