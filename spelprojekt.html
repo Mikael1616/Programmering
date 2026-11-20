@@ -13,13 +13,49 @@
         [0, 0, 0],
         [0, 0, 0],
     ]
-    
-
+    var playerRad = 1;
+    var playerKol = 2;
+    var poang = 0;
+    var tryckCooldown = 0; 
     function update () {
     clearScreen()
         fill("lightblue");
-        rectangle(150, 80, 460, 1000, "brown" );
+        rectangle(150, 80, 500, 1000, "brown" );
+        
+       for (var rad = 0; rad < 4; rad++) {
+        for (var kol = 0; kol < 6; kol++) {
+        var x = 180 + rad * 115;
+        var y = 120 + kol * 120;
+        rectangle(x, y, 90, 110, "white");
+        rectangle(x + 5, y + 5, 80, 100, "skyblue")
     }
+}
+ if (tryckCooldown > 0) {
+        tryckCooldown--;
+      }
+
+      if (tryckCooldown == 0) {
+        if (keyboard.up && playerRad > 0) {
+          playerRad--;
+          tryckCooldown = 8;
+        }
+        if (keyboard.down && playerRad < 5) {
+          playerRad++;
+          tryckCooldown = 8;
+        }
+        if (keyboard.left && playerKol > 0){
+          playerKol--;
+          tryckCooldown = 8;
+        }
+        if (keyboard.right && playerKol < 4) {
+          playerKol++;
+          tryckCooldown = 8;
+        }
+var playerX = 205 + playerKol * 100;
+      var playerY = 145 + playerRad * 120;
+      rectangle(playerX, playerY, 40, 50, "gold");
+    }
+}
   </script>
 </body>
 </html>
