@@ -9,12 +9,21 @@
   <script src="http://koda.nu/simple.js">
     // Skriv din kod här
     var byggnad = [
-        [0, 0, 0],
-        [0, 0, 0],
-        [0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0]
     ]
-    var slarNu = false;
-    var enemyTimer = 60;
+    //var slarNu = false;
+    var gulFonster = [
+      [false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false]
+    ];
+    var enemyTimer = 0;
 var enemyRad = 0;
 var enemyKol = 1;
     var playerRad = 1;
@@ -24,18 +33,34 @@ var enemyKol = 1;
     function update () {
     clearScreen()
         fill("lightblue");
-        rectangle(150, 80, 500, 1000, "brown" );
-        
-       for (var rad = 0; rad < 4; rad++) {
-        for (var kol = 0; kol < 6; kol++) {
-        var x = 180 + rad * 120;
-        var y = 120 + kol * 120;
+        rectangle(150, 80, 880, 2000, "brown" );
+        rectangle (500, 1300, 150, 300, "gray")
+    rectangle (0, 1500, 4000, 2000, "green");
+    circle (2000, 70, 150, "yellow")    
+       for (var rad = 0; rad < 5; rad++) {
+        for (var kol = 0; kol < 7; kol++) {
+        var x = 180 + kol * 120;
+        var y = 120 + rad * 120;
         rectangle(x, y, 90, 110, "white");
-        rectangle(x + 5, y + 5, 60, 80, "red");
-        rectangle(x + 5, y + 5, 80, 100, "skyblue")
+        
+
+    if (gulFonster[rad][kol]) {
+      rectangle(x, y, 90, 110, "yellow");
+      rectangle(x + 5, y + 5, 80, 100, "yellow"); // <-- ÄNDRAT
+          } else if (byggnad[rad][kol] == 0) { // <-- ÄNDRAT
+            rectangle(x + 5, y + 5, 80, 100, "skyblue");
+          } else if (byggnad[rad][kol] == 1) {
+            rectangle(x + 5, y + 5, 80, 100, "red");
+          } else {
+            rectangle(x + 5, y + 5, 80, 100, "black");
     }
 }
+}
+text(50, 50, 30, "Poäng: " + poang, "black");
 
+// if (gulFonster[rad][kol]) {
+        //    rectangle(x, y, 90, 110, "yellow");
+        //  }
  if (tryckCooldown > 0) {
         tryckCooldown--;
       }
@@ -45,7 +70,7 @@ var enemyKol = 1;
           playerRad--;
           tryckCooldown = 8;
         }
-        if (keyboard.down && playerRad < 5) {
+        if (keyboard.down && playerRad < 11) {
           playerRad++;
           tryckCooldown = 8;
         }
@@ -53,10 +78,18 @@ var enemyKol = 1;
           playerKol--;
           tryckCooldown = 8;
         }
-        if (keyboard.right && playerKol < 3) {
+        if (keyboard.right && playerKol < 6) {
           playerKol++;
           tryckCooldown = 8;
         }
+        if (keyboard.space) {
+  gulFonster[playerRad][playerKol] = false;
+  if (byggnad[playerRad][playerKol] > 0) {
+    byggnad[playerRad][playerKol]--;
+    poang += 10;
+  }
+  tryckCooldown = 8;
+}
         // 
 var playerX = 205 + playerKol * 120;
       var playerY = 145 + playerRad * 120;
@@ -64,17 +97,19 @@ var playerX = 205 + playerKol * 120;
     }
     enemyTimer++;
     if (enemyTimer > 60) {
-        enemyRad = random(3);
-        enemyKol = random (3);
+        enemyRad = random(5);
+        enemyKol = random (4);
         if (byggnad[enemyRad][enemyKol] < 2) {
     byggnad[enemyRad][enemyKol]++;
   }
-  slarNu = true;
-  enemyTimer = 0;
+ // slarNu = true;
+ gulFonster[enemyRad][enemyKol] = true;
+        enemyTimer = 0;
+  //enemyTimer = 0;
     }
-    if (slarNu > 0) {
-        rectangle(180 + enemyKol * 120, 120 + enemyRad * 120, 90, 110, "yellow");
-    }
+    //if (slarNu > 0) {
+       // rectangle(180 + enemyKol * 120, 120 + enemyRad * 120, 90, 110, "yellow");
+    //}
     rectangle(200 + enemyKol * 120, 140 + enemyRad * 120, 45, 45, "orange");{
     }
     
